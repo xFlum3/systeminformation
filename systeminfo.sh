@@ -7,9 +7,9 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 
-echo -e "${PURPLE}==================================================="
-echo -e "=  System Information Supports Only Ubuntu&Debian ="
-echo -e "=================================================== ${NC}"
+echo -e "${PURPLE}================================================================"
+echo -e "=  System Information Supports Only Ubuntu & Debian & Raspbian ="
+echo -e "================================================================ ${NC}"
 
 #Logos Display (Waste of time !!!!)
 os_type=$(hostnamectl | grep "Operating" | cut -d":" -f2 | cut -d" " -f2)
@@ -60,6 +60,9 @@ if test $USER = "root"; then
 	host=$(dmidecode | grep "Product" | head -n 1 | cut -d":" -f2)
 	version=$(dmidecode | grep -A3 '^System Information' | grep "Version:" | cut -d":" -f2)
 	echo -e "${RED} Host ${NC}: $host $version"
+elif test $os_type = "Raspbian"; then
+	host=$(cat /proc/cpuinfo | grep "Model" | cut -d":" -f2)
+	echo -e "${RED} Host ${NC}: $host"
 else
 	host=$(sudo dmidecode | grep "Product" | head -n 1 | cut -d":" -f2)
 	version=$(sudo dmidecode | grep -A3 '^System Information' | grep "Version:" | cut -d":" -f2)
@@ -91,7 +94,7 @@ shell=$(bash --version | grep "version" | cut -d" " -f4 | head -n1 | cut -d"(" -
 type=$(echo "$SHELL" | cut -d"/" -f3)
 echo -e "${RED} Shell ${NC}: $type $shell"
 
-#Resolution
+#Resolution (Cannot Support RaspberrPI)
 if test $os_type = "Ubuntu"; then
 	res=$(xdpyinfo | grep dimensions | cut -d":" -f2 | cut -d"(" -f1 | cut -d" " -f5-6)
 	echo -e "${RED} Resolution ${NC}: $res"
@@ -104,9 +107,7 @@ fi
 cpu=$(cat /proc/cpuinfo | grep "model name" | head -n 1 | cut -d":" -f2)
 echo -e "${RED} CPU ${NC}: $cpu"
 
-#GPU
-#gpu=$(lspci | grep VGA | cut -d" " -f5-8)
-#echo -e "${RED} GPU ${NC}: $gpu"
+#GPU (Cannot Support RaspberrPI)
 if test $os_type = "Ubuntu"; then
 	gpu=$(lspci | grep VGA | cut -d" " -f5-8)
 	echo -e "${RED} GPU ${NC}: $gpu"
