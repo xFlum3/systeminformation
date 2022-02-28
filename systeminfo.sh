@@ -92,16 +92,28 @@ type=$(echo "$SHELL" | cut -d"/" -f3)
 echo -e "${RED} Shell ${NC}: $type $shell"
 
 #Resolution
-res=$(xdpyinfo | grep dimensions | cut -d":" -f2 | cut -d"(" -f1 | cut -d" " -f5-6)
-echo -e "${RED} Resolution ${NC}: $res"
+if test $os_type = "Ubuntu"; then
+	res=$(xdpyinfo | grep dimensions | cut -d":" -f2 | cut -d"(" -f1 | cut -d" " -f5-6)
+	echo -e "${RED} Resolution ${NC}: $res"
+elif test $os_type = "Debian"; then
+	res=$(xdpyinfo | grep dimensions | cut -d":" -f2 | cut -d"(" -f1 | cut -d" " -f5-6)
+	echo -e "${RED} Resolution ${NC}: $res"
+fi
 
 #CPU
 cpu=$(cat /proc/cpuinfo | grep "model name" | head -n 1 | cut -d":" -f2)
 echo -e "${RED} CPU ${NC}: $cpu"
 
 #GPU
-gpu=$(lspci | grep VGA | cut -d" " -f5-8)
-echo -e "${RED} GPU ${NC}: $gpu"
+#gpu=$(lspci | grep VGA | cut -d" " -f5-8)
+#echo -e "${RED} GPU ${NC}: $gpu"
+if test $os_type = "Ubuntu"; then
+	gpu=$(lspci | grep VGA | cut -d" " -f5-8)
+	echo -e "${RED} GPU ${NC}: $gpu"
+elif test $os_type = "Debian"; then
+	gpu=$(lspci | grep VGA | cut -d" " -f5-8)
+	echo -e "${RED} GPU ${NC}: $gpu"
+fi
 
 #RAM
 memoryused=$(free -m | grep "Mem" | awk '{print $3}')
