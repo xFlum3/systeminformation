@@ -7,6 +7,7 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 PINK='\033[1;35m'
+WHITE='\033[1;37m'
 
 echo -e "${PURPLE}================================================================"
 echo -e "=  System Information Supports Only Ubuntu & Debian & Raspbian ="
@@ -24,13 +25,13 @@ if test $os_type = "Debian"; then
   --_
   ${NC}"
 elif test $os_type = "Ubuntu"; then
-  echo "
+  echo -e "${WHITE}
     ---(_)
  _/  ---  \\
 (_) |   |
   \\  --- _/
      ---(_)
-  "
+  ${NC}"
 elif test $os_type = "Raspbian"; then
 	echo -e "${PINK}
    ..    ,.
