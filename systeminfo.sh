@@ -6,6 +6,7 @@ NC='\033[0m' # No Color
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
+PINK='\033[1;35m'
 
 echo -e "${PURPLE}================================================================"
 echo -e "=  System Information Supports Only Ubuntu & Debian & Raspbian ="
@@ -14,14 +15,14 @@ echo -e "================================================================ ${NC}"
 #Logos Display (Waste of time !!!!)
 os_type=$(hostnamectl | grep "Operating" | cut -d":" -f2 | cut -d" " -f2)
 if test $os_type = "Debian"; then
-  echo "
+  echo -e "${RED}
   _____
  /  __ \\
 |  /    |
 |  \\___-
 -_
   --_
-  "
+  ${NC}"
 elif test $os_type = "Ubuntu"; then
   echo "
     ---(_)
@@ -31,7 +32,7 @@ elif test $os_type = "Ubuntu"; then
      ---(_)
   "
 elif test $os_type = "Raspbian"; then
-	echo "
+	echo -e "${PINK}
    ..    ,.
   :oo: .:oo:
   'o\\o o/o:
@@ -41,7 +42,7 @@ elif test $os_type = "Raspbian"; then
  ::: :::: :::
  ':,  ''  ,:'
    ' ~::~ '
-"
+${NC}"
 else
   echo "Cannot Found OS Type."
 fi
