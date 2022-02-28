@@ -55,6 +55,12 @@ os=$(hostnamectl | grep "Operating" | cut -d":" -f2)
 architecture=$(hostnamectl | grep "Archite" | cut -d":" -f2 | cut -d" " -f2)
 echo -e "${RED} OS ${NC}: $os $architecture"
 
+#Desktop Environment
+de=$(echo $XDG_CURRENT_DESKTOP)
+if test $os_type = "Ubuntu"; then
+	echo -e "${RED} DE ${NC}: $de"
+fi
+
 #Host
 if test $USER = "root"; then
 	host=$(dmidecode | grep "Product" | head -n 1 | cut -d":" -f2)
