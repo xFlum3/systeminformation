@@ -56,7 +56,7 @@ architecture=$(hostnamectl | grep "Archite" | cut -d":" -f2 | cut -d" " -f2)
 echo -e "${RED} OS ${NC}: $os $architecture"
 
 #Desktop Environment
-de=$(echo $XDG_CURRENT_DESKTOP)
+de=$(echo $XDG_CURRENT_DESKTOP | cut -d":" -f2)
 if test $os_type = "Ubuntu"; then
 	echo -e "${RED} DE ${NC}: $de"
 fi
