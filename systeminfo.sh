@@ -9,9 +9,9 @@ PURPLE='\033[0;35m'
 PINK='\033[1;35m'
 WHITE='\033[1;37m'
 
-echo -e "${PURPLE}================================================================"
-echo -e "=  System Information Supports Only Ubuntu & Debian & Raspbian ="
-echo -e "================================================================ ${NC}"
+echo -e "${PURPLE}=================================================================="
+echo -e "=  System Information Supports Only Ubuntu & Debian & Raspbian & Kali ="
+echo -e "=================================================================== ${NC}"
 
 #Logos Display (Waste of time !!!!)
 os_type=$(hostnamectl | grep "Operating" | cut -d":" -f2 | cut -d" " -f2)
