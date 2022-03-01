@@ -15,6 +15,7 @@ echo -e "================================================================ ${NC}"
 
 #Logos Display (Waste of time !!!!)
 os_type=$(hostnamectl | grep "Operating" | cut -d":" -f2 | cut -d" " -f2)
+
 if test $os_type = "Debian"; then
   echo -e "${RED}
   _____
@@ -83,10 +84,15 @@ echo -e "${RED} OS ${NC}: $os $architecture"
 
 #Desktop Environment
 de=$(echo $XDG_CURRENT_DESKTOP | cut -d":" -f2)
-if test $os_type = "Ubuntu"; then
-	echo -e "${RED} DE ${NC}: $de"
-elif test $os_type = "Kali"; then
-	echo -e "${RED} DE ${NC}: $de"
+
+if test $de != $de; then
+	echo -e "${RED} DE ${NC}: Not Exist!"
+elif test $de = "XFCE"; then
+	version=$(xfce4-session --version | head -n 1 | cut -d" " -f2)
+	echo -e "${RED} DE ${NC}: $de $version"
+elif test $de = "GNOME"; then
+	version=$(gnome-shell --version | cut -d" " -f3)
+	echo -e "${RED} DE ${NC}: $de $version"
 fi
 
 #Host
