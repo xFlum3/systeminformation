@@ -82,19 +82,6 @@ os=$(hostnamectl | grep "Operating" | cut -d":" -f2)
 architecture=$(hostnamectl | grep "Archite" | cut -d":" -f2 | cut -d" " -f2)
 echo -e "${RED} OS ${NC}: $os $architecture"
 
-#Desktop Environment
-de=$(echo $XDG_CURRENT_DESKTOP | cut -d":" -f2)
-
-if test $de != $de; then
-	echo -e "${RED} DE ${NC}: Not Exist!"
-elif test $de = "XFCE"; then
-	version=$(xfce4-session --version | head -n 1 | cut -d" " -f2)
-	echo -e "${RED} DE ${NC}: $de $version"
-elif test $de = "GNOME"; then
-	version=$(gnome-shell --version | cut -d" " -f3)
-	echo -e "${RED} DE ${NC}: $de $version"
-fi
-
 #Host
 if test $USER = "root"; then
 	host=$(dmidecode | grep "Product" | head -n 1 | cut -d":" -f2)
@@ -147,13 +134,35 @@ elif test $os_type = "Kali"; then
 	echo -e "${RED} Shell ${NC}: $type $shell"
 fi
 
+#Desktop Environment
+de=$(echo $XDG_CURRENT_DESKTOP | cut -d":" -f2)
+
+if test $de != $de; then
+	echo -e "${RED} DE ${NC}: Not Exist!"
+elif test $de = "XFCE"; then
+	version=$(xfce4-session --version | head -n 1 | cut -d" " -f2)
+	echo -e "${RED} DE ${NC}: $de $version"
+elif test $de = "GNOME"; then
+	version=$(gnome-shell --version | cut -d" " -f3)
+	echo -e "${RED} DE ${NC}: $de $version"
+fi
+
+#Windows Manager
+if test $de != $de; then
+	echo -e "${RED} WM ${NC}: Not Exist!"
+elif test $de = "GNOME"; then
+	echo -e "${RED} WM ${NC}: Mutter"
+elif tst $de = "XFCE"; then
+	echo -e "${RED} WM ${NC}: xfwm4"
+fi
+
 #Resolution (Cannot Support RaspberrPI)
 xorg=$(dpkg -l | grep -i xserver-xorg-core | cut -d" " -f3 | wc -l)
 if test $xorg -gt 0; then
     res=$(xdpyinfo | grep dimensions | cut -d":" -f2 | cut -d"(" -f1 | cut -d" " -f5-6)
     echo -e "${RED} Resolution ${NC}: $res"
 else
-    echo -e "${RED} Resolution ${NC}: Not Exist"
+    echo -e "${RED} Resolution ${NC}: Not Exist!"
 fi
 
 #CPU
