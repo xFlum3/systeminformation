@@ -119,14 +119,13 @@ echo -e "${RED} Uptime ${NC}: $uptime"
 
 #Packages (!Not Finished!)
 dpkg=$(dpkg --list | wc -l)
-#snap=$(snap list | wc -l)
+snap=$(snap list 2>/dev/null | wc -l)
 if test $dpkg != $dpkg; then
-	echo "0 (dpkg), "
-#elif test $snap != $snap; then
-#	echo "0 (snap)"
+        echo "0 (dpkg), "
+elif test $snap -lt 0; then
+        echo "0 (snap)"
 else
-	#echo -e "${RED} Packages ${NC}: $dpkg (dpkg), $snap (snap)"
-	echo -e "${RED} Packages ${NC}: $dpkg (dpkg)"
+        echo -e "${RED} Packages ${NC}: $dpkg (dpkg), $snap (snap)"
 fi
 
 #Shell
