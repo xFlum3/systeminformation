@@ -149,17 +149,6 @@ elif test $os_type = "Kali"; then
 fi
 
 #Resolution (Cannot Support RaspberrPI)
-#if test $os_type = "Ubuntu"; then
-#	res=$(xdpyinfo | grep dimensions | cut -d":" -f2 | cut -d"(" -f1 | cut -d" " -f5-6)
-#	echo -e "${RED} Resolution ${NC}: $res"
-#elif test $os_type = "Debian"; then
-#	res=$(xdpyinfo | grep dimensions | cut -d":" -f2 | cut -d"(" -f1 | cut -d" " -f5-6)
-#	echo -e "${RED} Resolution ${NC}: $res"
-#elif test $os_type = "Kali"; then
-#	res=$(xdpyinfo | grep dimensions | cut -d":" -f2 | cut -d"(" -f1 | cut -d" " -f5-6)
-#	echo -e "${RED} Resolution ${NC}: $res"
-#fi
-
 xorg=$(dpkg -l | grep -i xserver-xorg-core | cut -d" " -f3 | wc -l)
 if test $xorg -gt 0; then
     res=$(xdpyinfo | grep dimensions | cut -d":" -f2 | cut -d"(" -f1 | cut -d" " -f5-6)
