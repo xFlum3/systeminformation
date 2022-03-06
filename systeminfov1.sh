@@ -157,7 +157,7 @@ if test $de != $de; then
 	echo -e "${RED} WM ${NC}: Not Exist!"
 elif test $de = "GNOME"; then
 	echo -e "${RED} WM ${NC}: Mutter"
-elif tst $de = "XFCE"; then
+elif test $de = "XFCE"; then
 	echo -e "${RED} WM ${NC}: xfwm4"
 fi
 
