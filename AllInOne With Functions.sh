@@ -378,6 +378,7 @@ i3=$(i3 --version 2>/dev/null)
         i3) 
             version=$(i3 --version | cut -d" " -f3)
             echo -e "${RED} DE ${NC}: $i3 , $version"
+	;;
         *) echo -e "${RED} DE ${NC}: Not Exist! \ Not Supported!"
     esac
     }
